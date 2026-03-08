@@ -1,4 +1,5 @@
 import { useState, useRef } from 'react';
+import { motion } from 'framer-motion';
 import { format } from 'date-fns';
 import { zhTW } from 'date-fns/locale';
 import { CalendarIcon, Download, Share2, RotateCcw } from 'lucide-react';
@@ -76,10 +77,20 @@ const Index = () => {
   if (result) {
     return (
       <div className="min-h-screen bg-background flex flex-col items-center justify-center p-4">
-        <div className="w-full max-w-md mx-auto space-y-6" style={{ animation: 'scale-in 0.6s ease-out forwards' }}>
+        <motion.div
+          className="w-full max-w-md mx-auto space-y-6"
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.5, type: 'spring', stiffness: 100 }}
+        >
           <ColorReportCard ref={cardRef} result={result} />
 
-          <div className="flex gap-3 justify-center">
+          <motion.div
+            className="flex gap-3 justify-center"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, delay: 2.0 }}
+          >
             <Button
               onClick={handleDownload}
               variant="secondary"
@@ -96,9 +107,14 @@ const Index = () => {
               <Share2 className="w-4 h-4" />
               分享
             </Button>
-          </div>
+          </motion.div>
 
-          <div className="flex justify-center">
+          <motion.div
+            className="flex justify-center"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.4, delay: 2.3 }}
+          >
             <Button
               onClick={handleReset}
               variant="ghost"
@@ -107,8 +123,8 @@ const Index = () => {
               <RotateCcw className="w-4 h-4" />
               重新測驗
             </Button>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       </div>
     );
   }
