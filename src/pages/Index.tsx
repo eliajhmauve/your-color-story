@@ -2,7 +2,7 @@ import { useState, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { format } from 'date-fns';
 import { zhTW } from 'date-fns/locale';
-import { CalendarIcon, Download, Share2, RotateCcw } from 'lucide-react';
+import { CalendarIcon, Download, RotateCcw } from 'lucide-react';
 import { toPng } from 'html-to-image';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
