@@ -85,7 +85,12 @@ const Index = () => {
         >
           <ColorReportCard ref={cardRef} result={result} />
 
-          <div className="flex gap-3 justify-center">
+          <motion.div
+            className="flex gap-3 justify-center"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, delay: 2.0 }}
+          >
             <Button
               onClick={handleDownload}
               variant="secondary"
@@ -102,7 +107,7 @@ const Index = () => {
               <Share2 className="w-4 h-4" />
               分享
             </Button>
-          </div>
+          </motion.div>
 
           <div className="flex justify-center">
             <Button
