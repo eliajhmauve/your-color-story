@@ -85,11 +85,11 @@ export function generateColorReport(name: string, birthday: Date): ColorResult {
   const hueOffset = (day - 15) * 1.5; // -21 to +24
   const primaryHue = (baseHue + hueOffset + 360) % 360;
 
-  // Saturation from year (55-75 range for pleasing colors)
-  const saturation = 55 + ((year % 100) % 20);
+  // Saturation from year (40-60 range for softer, more elegant colors)
+  const saturation = 40 + ((year % 100) % 20);
 
-  // Lightness from name (45-65 for good readability)
-  const lightness = 45 + (nameValue % 20);
+  // Lightness from name (42-58 for balanced, non-fluorescent tones)
+  const lightness = 42 + (nameValue % 16);
 
   const primaryColor = {
     h: Math.round(primaryHue),
