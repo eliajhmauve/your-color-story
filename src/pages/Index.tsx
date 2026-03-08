@@ -48,23 +48,49 @@ const Index = () => {
     }
   };
 
-  const handleShare = async () => {
-    if (!cardRef.current) return;
+  const getShareImageUrl = async (): Promise<string | null> => {
+    if (!cardRef.current) return null;
     try {
-      const dataUrl = await toPng(cardRef.current, { pixelRatio: 2, backgroundColor: '#0a0a0f' });
-      const blob = await (await fetch(dataUrl)).blob();
-      if (navigator.share) {
+      return await toPng(cardRef.current, { pixelRatio: 2, backgroundColor: '#0a0a0f' });
+    } catch {
+      return null;
+    }
+  };
+
+  const handleShareLine = async () => {
+    const text = encodeURIComponent(`我的主色是${result?.colorName}！快來看看你的專屬色彩 🎨`);
+    const url = encodeURIComponent(window.location.href);
+    window.open(`https://social-plugins.line.me/lineit/share?text=${text}&url=${url}`, '_blank');
+  };
+
+  const handleShareFacebook = () => {
+    const url = encodeURIComponent(window.location.href);
+    window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}`, '_blank', 'width=600,height=400');
+  };
+
+  const handleShareIG = async () => {
+    const dataUrl = await getShareImageUrl();
+    if (!dataUrl) {
+      toast.error('圖片生成失敗');
+      return;
+    }
+    const blob = await (await fetch(dataUrl)).blob();
+    if (navigator.share) {
+      try {
         await navigator.share({
           title: `${result?.name} 的個人色彩報告`,
-          text: `我的主色是${result?.colorName}！快來看看你的專屬色彩 🎨`,
           files: [new File([blob], 'color-report.png', { type: 'image/png' })],
         });
-      } else {
-        await navigator.clipboard.write([new ClipboardItem({ 'image/png': blob })]);
-        toast.success('已複製到剪貼簿！');
+      } catch {
+        toast.error('分享失敗，請嘗試截圖分享');
       }
-    } catch {
-      toast.error('分享失敗，請嘗試截圖分享');
+    } else {
+      // Fallback: download image for manual IG upload
+      const link = document.createElement('a');
+      link.download = `${result?.name}-色彩報告.png`;
+      link.href = dataUrl;
+      link.click();
+      toast.success('圖片已下載，請手動上傳到 IG Story');
     }
   };
 
