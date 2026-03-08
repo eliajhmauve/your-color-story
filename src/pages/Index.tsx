@@ -1,4 +1,5 @@
 import { useState, useRef } from 'react';
+import { motion } from 'framer-motion';
 import { format } from 'date-fns';
 import { zhTW } from 'date-fns/locale';
 import { CalendarIcon, Download, Share2, RotateCcw } from 'lucide-react';
