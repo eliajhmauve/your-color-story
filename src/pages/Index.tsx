@@ -109,7 +109,12 @@ const Index = () => {
             </Button>
           </motion.div>
 
-          <div className="flex justify-center">
+          <motion.div
+            className="flex justify-center"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.4, delay: 2.3 }}
+          >
             <Button
               onClick={handleReset}
               variant="ghost"
@@ -118,8 +123,8 @@ const Index = () => {
               <RotateCcw className="w-4 h-4" />
               重新測驗
             </Button>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       </div>
     );
   }
