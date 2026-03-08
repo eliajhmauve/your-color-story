@@ -77,7 +77,12 @@ const Index = () => {
   if (result) {
     return (
       <div className="min-h-screen bg-background flex flex-col items-center justify-center p-4">
-        <div className="w-full max-w-md mx-auto space-y-6" style={{ animation: 'scale-in 0.6s ease-out forwards' }}>
+        <motion.div
+          className="w-full max-w-md mx-auto space-y-6"
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.5, type: 'spring', stiffness: 100 }}
+        >
           <ColorReportCard ref={cardRef} result={result} />
 
           <div className="flex gap-3 justify-center">
