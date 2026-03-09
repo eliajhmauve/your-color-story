@@ -2,6 +2,19 @@
 <html lang="zh-Hant">
   <head>
     <meta charset="UTF-8" />
+    <script>
+      // SPA redirect handler for GitHub Pages
+      (function(l) {
+        if (l.search[1] === '/') {
+          var decoded = l.search.slice(1).split('&').map(function(s) {
+            return s.replace(/~and~/g, '&')
+          }).join('?');
+          window.history.replaceState(null, null,
+            l.pathname.slice(0, -1) + decoded + l.hash
+          );
+        }
+      }(window.location))
+    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>你的個人色彩報告 — 發現專屬你的色彩</title>
     <meta name="description" content="輸入生日與姓名，生成你的專屬四色調色盤與色彩性格報告。立即體驗！" />
