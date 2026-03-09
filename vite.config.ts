@@ -4,8 +4,8 @@ import path from "path";
 import { componentTagger } from "lovable-tagger";
 
 // https://vitejs.dev/config/
-export default defineConfig(({
-  base: '/your-color-story/', mode }) => ({
+export default defineConfig(({ mode }) => ({
+  base: '/your-color-story/',
   server: {
     host: "::",
     port: 8080,
